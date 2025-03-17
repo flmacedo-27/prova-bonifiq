@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
+using ProvaPub.Application.Common.Interfaces;
+using ProvaPub.Application.Common.Mappings;
+using ProvaPub.Application.Common.Providers;
 using ProvaPub.Application.Factories;
 using ProvaPub.Application.Services;
 using ProvaPub.Domain.Interfaces.Factories;
@@ -24,6 +27,8 @@ try
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+    
+    builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
     builder.Services.AddScoped<IRandomService, RandomService>();
     builder.Services.AddScoped<ICustomerService, CustomerService>();
@@ -31,6 +36,7 @@ try
     builder.Services.AddScoped<IOrderService, OrderService>();
 
     builder.Services.AddScoped<IPaymentMethodFactory, PaymentMethodFactory>();
+    builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();
     builder.Services.AddScoped<PixPaymentService>();
     builder.Services.AddScoped<CreditCardPaymentService>();
     builder.Services.AddScoped<PayPalPaymentService>();

@@ -2,7 +2,6 @@
 using ProvaPub.Domain.Interfaces.Services;
 using ProvaPub.Domain.Models;
 using ProvaPub.Infrastructure.Data;
-using System.Text.Json;
 
 namespace ProvaPub.Application.Services
 {
@@ -58,17 +57,15 @@ namespace ProvaPub.Application.Services
                 await _ctx.Orders.AddAsync(order);
                 await _ctx.SaveChangesAsync();
 
-                string orderJson = JsonSerializer.Serialize(order, new JsonSerializerOptions { WriteIndented = true });
-                _logger.LogInformation("Order saved successfully. {OrderJson}", orderJson);
+                _logger.LogInformation("Order saved successfully. CustomerId: {CustomerId}, Value: {Value}", order.CustomerId, order.Value);
 
                 return order;
             }
             catch (Exception ex) 
             {
-                _logger.LogError(ex, "Error while saving the order to the database");
+                _logger.LogError(ex, "Error PayOrder");
                 return new Order();
             }
-            
         }
     }
 }
