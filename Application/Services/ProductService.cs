@@ -27,7 +27,7 @@ namespace ProvaPub.Application.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while fetching the products from the database");
+                _logger.LogError(ex, "Error ListProductsAsync");
                 return new PaginatedList<Product>(
                     items: new List<Product>(),
                     count: 0,

@@ -36,7 +36,7 @@ namespace ProvaPub.Application.Services
             }
             catch (Exception ex) 
             {
-                _logger.LogError(ex, "Error while saving the random number to the database");
+                _logger.LogError(ex, "Error GetRandom");
                 return new int();
             }
         }
